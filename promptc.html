@@ -90,8 +90,7 @@ const inputElement = document.getElementById('input');
 // Function to add a message to the output
 function addMessage(message,userInput='') {
     const messageElement = document.createElement('div');
-
-    messageElement.innerHTML = "<b>" + userInput + "</b>";
+ 
     messageElement.innerText= "\n"+" > "+  userInput+"\n"+message;
     outputElement.appendChild(  messageElement);
     outputElement.scrollTop = outputElement.scrollHeight;
