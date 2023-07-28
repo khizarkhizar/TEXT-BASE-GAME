@@ -1,0 +1,65 @@
+{ "game":[
+    {
+    "id":1,
+    "Senerio": "How deep is this shelf? \n\nBeneath the humming fluorescent lights of the tinned goods aisle you mechanically slide tins of XXX corned beef into place on the shelf, its dark nether regions swallowing each in turn, the pile seemingly never getting smaller. \n\nFrom the impossible quiet your managers breath tickles the back of your neck. \n\n'Those aren't done.' \n\nYou know. \n\n'You can't leave until they're done.' \n\nOkay. \n\nContending with his ungainly limbs your manager lumbers off around the corner. \n\nYou feel the buzz of your phone in your pocket. \n\nDo you A) open the text or B) Ignore the text (a/b)",
+    "choices":{
+        "a":
+        {
+            "text":"You glance over your shoulder to check the coast is clear. No sign of your manager, or Freddy, the boring jobsworth you've spent most of the shift avoiding.\n\nThe text is your friend telling you they're on their way to a party. It's not clear if they're inviting or bragging, but a followup message gives the address.\n\nYou look at the pile of unstacked Beefos. You'll be hear all night or longer if you wait. \n\nYou must escape without your manager seeing.\n\nLife is for living. You abandon the tins and make your way to the next aisle. You see a group of teens stuffing packet after packet of premium brand quinoa in their pockets. Do you \n\na) Approach the teens, their grain lust must have consequences. \n\nb)ignore the teens and take to the next aisle(a/b)",
+            "a" : {
+
+                "text":"You approach the teens, reassuring them that you were once their age. They scarper, silmultaneously dropping the quinoa and hurtiing your feelings.\n\nYou pick up a heap of quinoa from the burst bag, and let it run you through your fingers. Where has the time gone.\n\nDisaster strikes. You hear Freddy's voice calling for you as he approaches from the end of the aisle.\n\nYou've not turned yet. You can still convincingly claim you hadn't heard him. Do you a) Flee to the confectionary aisle, his voice has so drained you that you need a pick me up!\n\nb)flee to the frozen food aisle, the sound of his voice raises your blood pressure so you need to cool off.\n\nc) stay and listen, maybe he has something interesting to say",
+                "a":{
+                    "text":"You scamper to the sweet aisle and take a breath. Freddy is still calling your name in the distance so you know you've got no time to stop.\n\nA chill shoots up your spine. You hear your manager's feral cry. He's found the unstacked tins.\n\nBefore you can run an old woman stands in front of you. \n\n'Where are they? Where are my frozen eggs?'\n\nYou've no idea what she's on about. You don't think you sell frozen eggs.\n\n'LOVELY SMOOTH AND LOVELY ROUND! I LOVELY LOVE TO SCOFF THEM DOWN!'\n\nShe repeats herself over and over, getting louder each time. Do you \n\na) Make a run for it! She's lost the plot, and there's no way your manager hasn't heard her.\n\nb)Try to appease her.",
+                    "a":{
+                        "text":"You spring to the clothaes section. The pounding gallop of your manager is close behind. You can see the exit from here, but he's close. Your hands are jittering, your heart is pounding. Do you\n\na) Sprint for the exit! What kind of sicko would stay to be devoured by this foul beast?\n\nb)Hide in the clothes. There's no way you're outrunning hin. You need time to consider your options." 
+                        , "gameOver":true                     
+                    },
+
+                    "b":{
+                        "text":"to the sweet aisle and take a breath. Freddy"
+                        , "a":{
+                            "text":"GameOver" , "gameOver":true  
+                        } 
+                    }
+                    
+                
+                },
+                "b":{
+                    "text":"You scamper to the sweet aisle and take a breath. Freddy is still calling your name in the distance so you know you've got no time to stop.\n\nA chill shoots up your spine. You hear your manager's feral cry. He's found the unstacked tins.\n\nBefore you can run an old woman stands in front of you. \n\n'Where are they? Where are my frozen eggs?'\n\nYou've no idea what she's on about. You don't think you sell frozen eggs.\n\n'LOVELY SMOOTH AND LOVELY ROUND! I LOVELY LOVE TO SCOFF THEM DOWN!'\n\nShe repeats herself over and over, getting louder each time. Do you \n\na) Make a run for it! She's lost the plot, and there's no way your manager hasn't heard her.\n\nb)Try to appease her.",
+                    "a":{
+                        "text":"You spring to the clothaes section. The pounding gallop of your manager is close behind. You can see the exit from here, but he's close. Your hands are jittering, your heart is pounding. Do you\n\na) Sprint for the exit! What kind of sicko would stay to be devoured by this foul beast?\n\nb)Hide in the clothes. There's no way you're outrunning hin. You need time to consider your options." 
+                        , "gameOver":true  
+                    },
+                    "b":{
+                        "text":"to the sweet aisle and take a breath. Freddy"
+                        , "gameOver":true  
+                    }
+                },
+                "c":{
+                    "text":"You scamper to the sweet aisle and take a breath. Freddy is still calling your name in the distance so you know you've got no time to stop.\n\nA chill shoots up your spine. You hear your manager's feral cry. He's found the unstacked tins.\n\nBefore you can run an old woman stands in front of you. \n\n'Where are they? Where are my frozen eggs?'\n\nYou've no idea what she's on about. You don't think you sell frozen eggs.\n\n'LOVELY SMOOTH AND LOVELY ROUND! I LOVELY LOVE TO SCOFF THEM DOWN!'\n\nShe repeats herself over and over, getting louder each time. Do you \n\na) Make a run for it! She's lost the plot, and there's no way your manager hasn't heard her.\n\nb)Try to appease her.",
+                    "a":{
+                        "text":"You spring to the clothaes section. The pounding gallop of your manager is close behind. You can see the exit from here, but he's close. Your hands are jittering, your heart is pounding. Do you\n\na) Sprint for the exit! What kind of sicko would stay to be devoured by this foul beast?\n\nb)Hide in the clothes. There's no way you're outrunning hin. You need time to consider your options." 
+                        , "gameOver":true  
+                    },
+                    "b":{
+                        "text":"to the sweet aisle and take a breath. Freddy"
+                        , "gameOver":true  
+                    }
+                }
+            
+            }
+        },
+        "b":
+        {
+            "text":"You decide to stay and listen to Freddy, hoping that he might have something interesting to say. But he just goes on and on about his weekend plans, and you find it hard to keep yourself from yawning.\n\nTime passes, and the night drags on. You try to engage in the conversation, but it's clear that Freddy is just killing time, and you're stuck listening to his ramblings.\n\nFinally, after what feels like an eternity, your shift comes to an end. You haven't accomplished much, and you're exhausted from the night's events.\n\nAs you step outside, you breathe a sigh of relief. You survived the night at the store, but it wasn't exactly a thrilling adventure.\n\nGame over.",
+            "a" : "You spring into the clothes section. The pounding gallop of your manager is close behind. You can see the exit from here, but he's close. Your hands are jittering, your heart is pounding. Do you\n\na) Sprint for the exit! What kind of sicko would stay to be devoured by this foul beast?\n\nb) Hide in the clothes! There's no way you're outrunning him. You need time to consider your options." 
+            , "gameOver":true  
+        }
+    
+    }
+    } 
+
+
+]
+}

@@ -1,0 +1,197 @@
+<html><head>
+    <title> Text Prompt Game </title> 
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    background-color: #f7f5c0;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    margin: 0;
+    }
+    
+   .Container{
+    padding-top: 49px;
+    padding-left: 208px;
+    padding-right: 120px;
+    padding-bottom: 62px;
+   }
+    
+    .header {
+        font-size: 20px;
+        font-weight: bold;
+        display: block;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    
+    #output {
+        min-height: 120px;
+        border: 0px solid #ccc;
+        border-radius: 5px;
+        padding: 5px;
+        padding-top:5px ;
+   
+        overflow-y: auto;
+    }
+    #output .div{
+        padding-top:5px ;
+    }
+    .input-container {
+        display: flex;
+        align-items: center;
+        margin-top: 47px;
+    }
+    
+    .arrow {
+        margin-top: 10px;
+        font-size: 18px;
+        margin-right: 5px;
+    }
+    
+    #input {
+        flex: 1;
+    padding: 5px;
+    border: 0px solid;
+    /* border-radius: 5px; */
+    outline: none;
+    background-color: transparent;
+    }
+    
+</style></head>
+
+<body>
+    <div >
+        <div class="Container" >
+            <span class="header">TextBased Prompt Game</span>
+            <p id="scenario" style="font-family: cursive;"></p>
+            <div id="output" style="font-family: monospace;"> </div>
+            <div class="input-container">
+                <span class="arrow">&gt;</span>
+                <input type="text" id="input" autofocus="">
+            </div>
+            
+        </div>
+    </div>
+    <script> 
+        let choicesCheck=null;
+        function displayScenarioAndChoices(jsonData) {
+            const scenarioElement = document.getElementById('scenario');
+           
+
+            // Show the scenario
+            const scenario = jsonData.game[0].Senerio;
+            scenarioElement.innerText = scenario;
+ 
+        }
+        const outputElement = document.getElementById('output');
+const inputElement = document.getElementById('input');
+
+// Function to add a message to the output
+function addMessage(message,userInput='') {
+    const messageElement = document.createElement('div');
+
+    messageElement.innerHTML = "<b>" + userInput + "</b>";
+    messageElement.innerText= "\n"+" > "+  userInput+"\n"+message;
+    outputElement.appendChild(  messageElement);
+    outputElement.scrollTop = outputElement.scrollHeight;
+}
+
+// Function to handle user input
+function handleInput() {
+    const userInput = inputElement.value.trim().toLowerCase();
+    inputElement.value = '';
+
+            // Check if the user input is valid
+            if (userInput === 'a' || userInput === 'b' || userInput === 'c') {
+                // Fetch the JSON data
+                fetch('data.json')
+                    .then(response => response.json())
+                    .then(jsonData => {
+                        // Get the corresponding text for the user's choice
+                        
+                        if (choicesCheck==null)
+                            {
+                                
+                            console.log("choicesCheck value" ,choicesCheck)
+                            choicesCheck=jsonData.game[0].choices;
+                            
+                            console.log("choicesCheck value" ,choicesCheck)
+                            }
+                        // Loop until we find the final text for the user's choice
+                        if (choicesCheck!=null && choicesCheck[userInput]!=null) {
+                             
+                            
+                            console.log("choicesCheck value" ,choicesCheck)
+                            
+                                // Display the final result
+                             addMessage(choicesCheck[userInput].text,userInput);
+                           
+                            if(choicesCheck[userInput].gameOver && choicesCheck[userInput].gameOver==true){
+                                console.log("Game Over")
+                                addMessage("Game Over !!");
+                                //show button to reset
+                                // Hide Arrow
+                           
+                            }
+                            
+                            choicesCheck=choicesCheck[userInput];
+                            console.log("choicesCheck value1" ,choicesCheck[userInput])
+                           // userInput = jsonData.game[0].choices[userInput][userInput].next;
+                        }
+                       
+                        else{
+
+                            console.log("Something issue")
+                        }
+
+                    
+                      //  outputElement.innerText = choiceText;
+                    })
+                    .catch(error => {
+                        console.error('Error fetching JSON data:', error);
+                       
+                    });
+            } 
+            else if(userInput==='help'){
+                addMessage( "Please enter 'a', 'b', or 'c'.");
+              //  outputElement.innerText = "Please enter 'a', 'b', or 'c'.";
+
+            }
+            else {
+                // If the user input is invalid, show an error message
+                addMessage( " Invalid input! Please enter 'a', 'b', or 'c'.");
+              //  outputElement.innerText = "Invalid input! Please enter 'a', 'b', or 'c'.";
+            }
+   // if (userInput === 'a') {
+     //   addMessage('a\n'+'Hello!');
+   // } else if (userInput === 'b') {
+     //   addMessage('You entered b!');
+    //} else if (userInput === 'c') {
+     //   addMessage('You entered c!');
+    //} else {
+     //   addMessage('Invalid input. Try again.');
+    //}
+}
+
+// Add event listener to handle user input
+inputElement.addEventListener('keyup', function (event) {
+    if (event.key === 'Enter') {
+        handleInput();
+    }
+});
+ // Fetch the JSON data when the page loads
+ fetch('/data.json')
+ .then(response => response.json())
+ .then(jsonData => {
+     // Call the function to display the scenario and choices
+     displayScenarioAndChoices(jsonData);
+ })
+ .catch(error => {
+     console.error('Error fetching JSON data:', error);
+ });
+  
+    </script>
+
+
+</body></html>
