@@ -1,280 +1,288 @@
 <!DOCTYPE html>
-<html> 
+<html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <head>
-    <title> Scenario Game </title> 
-<style>
+<head>
+  <title> Scenario Game </title>
+  <style>
     body {
-        font-family: Arial, sans-serif;
-    background-color: #CEC1E5;
-    display: flex;
-    justify-content: center;
-    /* align-items: center; */ 
-    margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #CEC1E5;
+      display: flex;
+      justify-content: center;
+      /* align-items: center; */
+      margin: 0;
     }
-    
-   .Container{
-    padding-top: 158px;
-    padding-left: 332px;
-    padding-right: 320px;
-    padding-bottom: 62px;
-   }
-    
+
+    .Container {
+      padding-top: 158px;
+      padding-left: 332px;
+      padding-right: 320px;
+      padding-bottom: 62px;
+    }
+
     .header {
-        font-size: 20px;
-        font-weight: bold;
-        display: block;
-        text-align: center;
-        margin-bottom: 10px;
+      font-size: 20px;
+      font-weight: bold;
+      display: block;
+      text-align: center;
+      margin-bottom: 10px;
     }
-    
+
     #output {
-        min-height: 120px;
-        border: 0px solid #ccc;
-        border-radius: 5px;
-        padding: 5px;
-        padding-top:5px ;
-   
-        overflow-y: auto;
+      min-height: 120px;
+      border: 0px solid #ccc;
+      border-radius: 5px;
+      padding: 5px;
+      padding-top: 5px;
+
+      overflow-y: auto;
     }
-    #output .div{
-        padding-top:5px ;
-      
-  
+
+    #output .div {
+      padding-top: 5px;
+
+
     }
+
     .input-container {
-        display: flex;
-        align-items: center;
-        margin-top: 47px;
+      display: flex;
+      align-items: center;
+      margin-top: 47px;
     }
-    
+
     .arrow {
-        margin-top: 10px;
-        font-size: 18px;
-        margin-right: 5px;
+      margin-top: 10px;
+      font-size: 18px;
+      margin-right: 5px;
     }
-    
+
     #input {
-        flex: 1;
-    padding: 5px;
-    border: 0px solid;
-    /* border-radius: 5px; */
-    outline: none;
-    background-color: transparent;
+      flex: 1;
+      padding: 5px;
+      border: 0px solid;
+      /* border-radius: 5px; */
+      outline: none;
+      background-color: transparent;
     }
+
     .fixed-image {
-        width: 100%;
-        height: 105px;    position: fixed;
+      width: 100%;
+      height: 105px;
+      position: fixed;
     }
-</style></head>
+  </style>
+</head>
 
 <body>
-    <div   > 
-        <div class="fixed-image">
-        <img src="Game Cover.png"  style="width: 100%;
-        height: 105px;"></div>
-        <div class="Container" >  
-        
-            <p id="scenario" style="font-family: monospace;"></p> 
-           
-            <div id="output"  style="font-family: monospace; ">   <hr style="width: 818px;"> </div>
-
-
-            <div class="input-container">
-                <!-- <span class="arrow">&gt;</span> -->
-                <!-- <input type="text" id="input" autofocus=""> -->
-            </div> 
-            <div id="resetButtonContainer" style="display: none;">
-                <button id="resetButton">Reset Browser</button>
-              </div>
-
-
-        </div>
+  <div>
+    <div class="fixed-image">
+      <img src="Game Cover.png" style="width: 100%;
+        height: 105px;">
     </div>
-    <script>  
+    <div class="Container">
+
+      <p id="scenario" style="font-family: monospace;"></p>
+
+      <div id="output" style="font-family: monospace; ">
+        <hr style="width: 818px;">
+      </div>
+
+
+      <div class="input-container">
+        <!-- <span class="arrow">&gt;</span> -->
+        <!-- <input type="text" id="input" autofocus=""> -->
+      </div>
+      <div id="resetButtonContainer" style="display: none;">
+        <button id="resetButton">Reset Browser</button>
+      </div>
+
+
+    </div>
+  </div>
+  <script>
     const resetButtonContainer = document.getElementById('resetButtonContainer');
     const resetButton = document.getElementById('resetButton');
-    
+
     const container = document.getElementById('Container');
-    
+
     resetButtonContainer.style.display = 'none';
-        let choicesCheck=null;
-        function displayScenarioAndChoices(jsonData) {
-            const scenarioElement = document.getElementById('scenario'); 
-            // Show the scenario
-            const scenario = jsonData.game[0].Senerio;
-            scenarioElement.innerText = scenario; 
+    let choicesCheck = null;
+    function displayScenarioAndChoices(jsonData) {
+      const scenarioElement = document.getElementById('scenario');
+      // Show the scenario
+      const scenario = jsonData.game[0].Senerio;
+      scenarioElement.innerText = scenario;
+    }
+
+    function showTextCharacterByCharacter(messageElement, container) {
+
+      let index = 0;
+      const interval = 5; // Time delay in milliseconds (adjust as needed)
+
+      function appendCharacter() {
+        if (index < messageElement.innerText.length) {
+          container.textContent += messageElement.innerText[index];
+          index++;
+          setTimeout(appendCharacter, interval);
         }
- 
-function showTextCharacterByCharacter(messageElement, container) {
-  
-    let index = 0;
-    const interval = 5; // Time delay in milliseconds (adjust as needed)
-  
-    function appendCharacter() {
-      if (index < messageElement.innerText.length) {
-        container.textContent += messageElement.innerText[index];
-        index++;
-        setTimeout(appendCharacter, interval);
+      }
+
+      appendCharacter();
+      if (index >= messageElement.innerText.length) {
+
+        container.appendChild(messageElement);
       }
     }
-  
-    appendCharacter(); 
-    if(index>=messageElement.innerText.length){
-   
-        container.appendChild(  messageElement);
-    }
-  }
-  
-  const outputElement = document.getElementById('output');
-  //const inputElement = document.getElementById('input');
-  
-  // Function to add a message to the output
-  //function addMessage(message, userInput = '') {
-   // const messageElement = document.createElement('div');
-//  const brElement = document.createElement('br');
- // const boldElement = document.createElement('b');
- // boldElement.innerHTML = "> ";
-  
-  //messageElement.appendChild(brElement);
- // messageElement.appendChild(boldElement);
- // messageElement.innerHTML += userInput + " " + message;
 
-  //function appendCharacter(index) {
-   // if (index < messageElement.innerHTML.length) {
-     // outputElement.lastChild.innerHTML += messageElement.innerHTML[index];
-     // setTimeout(() => appendCharacter(index + 1), 10); // Adjust the interval as needed
-   // }
-  //}
+    const outputElement = document.getElementById('output');
+    //const inputElement = document.getElementById('input');
 
- // outputElement.appendChild(document.createElement('div')); 
- // appendCharacter(0);
+    // Function to add a message to the output
+    //function addMessage(message, userInput = '') {
+    // const messageElement = document.createElement('div');
+    //  const brElement = document.createElement('br');
+    // const boldElement = document.createElement('b');
+    // boldElement.innerHTML = "> ";
 
-  //}
+    //messageElement.appendChild(brElement);
+    // messageElement.appendChild(boldElement);
+    // messageElement.innerHTML += userInput + " " + message;
 
-  // Function to add a message to the output
-function addMessage(message,userInput='') {
+    //function appendCharacter(index) {
+    // if (index < messageElement.innerHTML.length) {
+    // outputElement.lastChild.innerHTML += messageElement.innerHTML[index];
+    // setTimeout(() => appendCharacter(index + 1), 10); // Adjust the interval as needed
+    // }
+    //}
 
-    const messageElement = document.createElement('div');
-    
-    if(userInput==''){
+    // outputElement.appendChild(document.createElement('div')); 
+    // appendCharacter(0);
 
-      messageElement.innerText= "\n"+   userInput+"\n\n"+message +"\n\n"+"----------------------------------------------------------------------------------------------\n\n";
-      
-    }
-    else
-    {
-      messageElement.innerText= "\n"+" > "+  userInput+"\n\n"+message +"\n\n"+"----------------------------------------------------------------------------------------------\n\n";
-   
-    }
-    outputElement.appendChild(  messageElement);
-  // showTextCharacterByCharacter(messageElement, outputElement);
+    //}
+
+    // Function to add a message to the output
+    function addMessage(message, userInput = '') {
+
+      const messageElement = document.createElement('div');
+
+      if (userInput == '') {
+
+        messageElement.innerText = "\n" + userInput + "\n\n" + message + "\n\n" + "----------------------------------------------------------------------------------------------\n\n";
+
+      }
+      else {
+        messageElement.innerText = "\n" + " > " + userInput + "\n\n" + message + "\n\n" + "----------------------------------------------------------------------------------------------\n\n";
+
+      }
+      outputElement.appendChild(messageElement);
+      // showTextCharacterByCharacter(messageElement, outputElement);
 
     }
-  
-// Function to handle user input
-function handleInput(userInput) { 
-  
-            
-            // Check if the user input is valid
-            if (userInput === 'a' || userInput === 'b' || userInput === 'c') {
-                // Fetch the JSON data
-                fetch('data.json')
-                    .then(response => response.json())
-                    .then(jsonData => {
-                        // Get the corresponding text for the user's choice
-                        
-                        if (choicesCheck==null)
-                            {
-                                 
-                            choicesCheck=jsonData.game[0].choices;
-                             
-                            }
-                        // Loop until we find the final text for the user's choice
-                        if (choicesCheck!=null && choicesCheck[userInput]!=null) { 
-                                // Display the final result
-                             addMessage(choicesCheck[userInput].text,userInput);
-                           
-                            if(choicesCheck[userInput].gameOver && choicesCheck[userInput].gameOver==true){
-                                console.log("Game Over");
-                                resetButtonContainer.style.display = 'block';
-                                addMessage("Game Over !!");
-                                //show button to reset
-                                // Hide Arrow
-                           
-                            }
-                            
-                            choicesCheck=choicesCheck[userInput];
-                            console.log("choicesCheck value1" ,choicesCheck[userInput])
-                           // userInput = jsonData.game[0].choices[userInput][userInput].next;
-                        }
-                       
-                        else{
 
-                            console.log("Something issue");
-                        }
+    // Function to handle user input
+    function handleInput(userInput) {
 
-                    
-                      //  outputElement.innerText = choiceText;
-                    })
-                    .catch(error => {
-                        console.error('Error fetching JSON data:', error);
-                       
-                    });
-            } 
-            else if(userInput==='help'){
-              
-                  resetButtonContainer.style.display = 'block';
-             
-                addMessage( "Please enter 'a', 'b', or 'c'.");
-              //  outputElement.innerText = "Please enter 'a', 'b', or 'c'.";
+
+      // Check if the user input is valid
+      if (userInput === 'a' || userInput === 'b' || userInput === 'c') {
+        // Fetch the JSON data
+        fetch('data.json')
+          .then(response => response.json())
+          .then(jsonData => {
+            // Get the corresponding text for the user's choice
+
+            if (choicesCheck == null) {
+
+              choicesCheck = jsonData.game[0].choices;
 
             }
+            // Loop until we find the final text for the user's choice
+            if (choicesCheck != null && choicesCheck[userInput] != null) {
+              // Display the final result
+              addMessage(choicesCheck[userInput].text, userInput);
+
+              if (choicesCheck[userInput].gameOver && choicesCheck[userInput].gameOver == true) {
+                console.log("Game Over");
+                resetButtonContainer.style.display = 'block';
+                addMessage("Game Over !!");
+                //show button to reset
+                // Hide Arrow
+
+              }
+
+              choicesCheck = choicesCheck[userInput];
+              console.log("choicesCheck value1", choicesCheck[userInput])
+              // userInput = jsonData.game[0].choices[userInput][userInput].next;
+            }
+
             else {
-                // If the user input is invalid, show an error message
-                addMessage( " Invalid input! Please enter 'a', 'b', or 'c'.");
-              //  outputElement.innerText = "Invalid input! Please enter 'a', 'b', or 'c'.";
-            }
-  
-}
 
-// Add event listener to handle user input
-//inputElement.addEventListener('keyup', function (event) {
-  //  if (event.key === 'Enter') {
+              console.log("Something issue");
+            }
+
+
+            //  outputElement.innerText = choiceText;
+          })
+          .catch(error => {
+            console.error('Error fetching JSON data:', error);
+
+          });
+      }
+      else if (userInput === 'help') {
+
+        resetButtonContainer.style.display = 'block';
+
+        addMessage("Please enter 'a', 'b', or 'c'.");
+        //  outputElement.innerText = "Please enter 'a', 'b', or 'c'.";
+
+      }
+      else {
+        // If the user input is invalid, show an error message
+        addMessage(" Invalid input! Please enter 'a', 'b', or 'c'.");
+        //  outputElement.innerText = "Invalid input! Please enter 'a', 'b', or 'c'.";
+      }
+
+    }
+
+    // Add event listener to handle user input
+    //inputElement.addEventListener('keyup', function (event) {
+    //  if (event.key === 'Enter') {
     //    handleInput();
     //}
-//});
- 
-document.addEventListener('keyup', function(event) {
+    //});
 
-  const keyPressed = event.key.toLowerCase();
-  const alphabetRegex = /^[a-z]$/i; // Regular expression to match any alphabet (case-insensitive)
-    
- 
-  if (alphabetRegex.test(keyPressed)) {
-  
-    handleInput(keyPressed);
-  }
-});
+    document.addEventListener('keyup', function (event) {
 
- // Fetch the JSON data when the page loads
- fetch('data.json')
- .then(response => response.json())
- .then(jsonData => {
-     // Call the function to display the scenario and choices
-     displayScenarioAndChoices(jsonData);
- })
- .catch(error => {
-     console.error('Error fetching JSON data:', error);
- }); 
-
- resetButton.addEventListener('click', () => {
-    location.reload(); // Reloads the page and resets the browser
-  });
+      const keyPressed = event.key.toLowerCase();
+      const alphabetRegex = /^[a-z]$/i; // Regular expression to match any alphabet (case-insensitive)
 
 
-</script>
+      if (alphabetRegex.test(keyPressed)) {
+
+        handleInput(keyPressed);
+      }
+    });
+
+    // Fetch the JSON data when the page loads
+    fetch('data.json')
+      .then(response => response.json())
+      .then(jsonData => {
+        // Call the function to display the scenario and choices
+        displayScenarioAndChoices(jsonData);
+      })
+      .catch(error => {
+        console.error('Error fetching JSON data:', error);
+      });
+
+    resetButton.addEventListener('click', () => {
+      location.reload(); // Reloads the page and resets the browser
+    });
 
 
-</body></html>
+  </script>
+
+
+</body>
+
+</html>
