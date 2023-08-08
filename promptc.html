@@ -3,7 +3,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <head>
-  <title> Scenario Game </title>
+  <title> SHIFT  </title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -15,7 +15,7 @@
     }
 
     .Container {
-      padding-top: 158px;
+      padding-top: 64px;
       padding-left: 332px;
       padding-right: 320px;
       padding-bottom: 62px;
@@ -66,25 +66,23 @@
       background-color: transparent;
     }
 
-    .fixed-image {
-      width: 100%;
-      height: 105px;
-      position: fixed;
+    .fixed-image { 
+      text-align: center;
     }
   </style>
 </head>
 
 <body>
   <div>
-    <div class="fixed-image">
-      <img src="Game Cover.png" style="width: 100%;
-        height: 105px;">
-    </div>
+    
     <div class="Container">
+      <div class="fixed-image">
+        <h1 ><b>SHIFT</b></h1>
+      </div>
+   
+      <p id="scenario" style="font-family: monospace;      margin-left: 34px;  margin-top: 58px;"></p>
 
-      <p id="scenario" style="font-family: monospace;"></p>
-
-      <div id="output" style="font-family: monospace; ">
+      <div id="output" style="font-family: monospace;     margin-top: 58px;">
         <hr style="width: 818px;">
       </div>
 
@@ -101,6 +99,8 @@
     </div>
   </div>
   <script>
+
+
     const resetButtonContainer = document.getElementById('resetButtonContainer');
     const resetButton = document.getElementById('resetButton');
 
@@ -108,8 +108,9 @@
 
     resetButtonContainer.style.display = 'none';
     let choicesCheck = null;
+    
+    const scenarioElement = document.getElementById('scenario');
     function displayScenarioAndChoices(jsonData) {
-      const scenarioElement = document.getElementById('scenario');
       // Show the scenario
       const scenario = jsonData.game[0].Senerio;
       scenarioElement.innerText = scenario;
@@ -164,21 +165,38 @@
     // Function to add a message to the output
     function addMessage(message, userInput = '') {
 
-      const messageElement = document.createElement('div');
+     // const messageElement = document.createElement('div');
 
       if (userInput == '') {
 
-        messageElement.innerText = "\n" + userInput + "\n\n" + message + "\n\n" + "----------------------------------------------------------------------------------------------\n\n";
+        outputElement.innerText = "\n" + userInput + "\n\n" + message + "\n\n" + "----------------------------------------------------------------------------------------------\n\n";
 
       }
       else {
-        messageElement.innerText = "\n" + " > " + userInput + "\n\n" + message + "\n\n" + "----------------------------------------------------------------------------------------------\n\n";
+        outputElement.innerText = "\n" + " > " + userInput + "\n\n" + message + "\n\n" + "----------------------------------------------------------------------------------------------\n\n";
 
       }
-      outputElement.appendChild(messageElement);
+      //outputElement.appendChild(messageElement);
       // showTextCharacterByCharacter(messageElement, outputElement);
 
     }
+    function addGameOverMessage(message, userInput = '') {
+
+      const messageElement = document.createElement('div');
+ 
+       if (userInput == '') {
+ 
+        messageElement.innerText = "\n" + userInput + "\n\n" + message + "\n\n" + "----------------------------------------------------------------------------------------------\n\n";
+ 
+       }
+       else {
+        messageElement.innerText = "\n" + " > " + userInput + "\n\n" + message + "\n\n" + "----------------------------------------------------------------------------------------------\n\n";
+ 
+       }
+       outputElement.appendChild(messageElement);
+       // showTextCharacterByCharacter(messageElement, outputElement);
+ 
+     }
 
     // Function to handle user input
     function handleInput(userInput) {
@@ -205,7 +223,7 @@
               if (choicesCheck[userInput].gameOver && choicesCheck[userInput].gameOver == true) {
                 console.log("Game Over");
                 resetButtonContainer.style.display = 'block';
-                addMessage("Game Over !!");
+                addGameOverMessage("Game Over !!");
                 //show button to reset
                 // Hide Arrow
 
@@ -260,7 +278,13 @@
 
       if (alphabetRegex.test(keyPressed)) {
 
+
+        scenarioElement.style.display="none";
         handleInput(keyPressed);
+      }
+      else{
+
+        addMessage("Invalid Input!");
       }
     });
 
